@@ -1,20 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <h1>Todo List</h1>
+    <AddTodo />
+    <TodoList />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import AddTodo from '@/components/AddTodo.vue';
+import TodoList from '@/components/TodoList.vue';
+import { Getter } from 'vuex-class';
 
 @Component({
   components: {
-    HelloWorld,
+    AddTodo,
+    TodoList
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 </script>
 
 <style>
