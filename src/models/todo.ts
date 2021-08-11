@@ -1,13 +1,7 @@
-class Todo {
-    title: string
+interface Todo {
+    id: number
     description: string
     done: boolean
-
-    constructor(){
-        this.title = ''
-        this.description = ''
-        this.done = false
-    }
 }
 
 export default Todo;

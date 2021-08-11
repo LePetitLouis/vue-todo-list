@@ -1,7 +1,7 @@
 <template>
     <div id="todo-list">
         <div v-for="todo in this.todos" :key="todo.id">
-              <Todo :todo="todo" />
+              <Todo :todo="todo" @removeTodo="removeTodo" />
         </div>
     </div>
 </template>
@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Todo from '@/components/Todo.vue';
-import { Getter } from 'vuex-class';
+import { Getter, Action } from 'vuex-class';
 
 @Component({
   components: {
@@ -17,11 +17,16 @@ import { Getter } from 'vuex-class';
   },
 })
 export default class TodoList extends Vue {
-    todos: any
     @Getter('todos') getTodos: any
+    @Action('deleteTodo') deleteTodo: any
 
-    created() {
-        this.todos = this.getTodos
+    get todos() {
+        return this.getTodos
+    }
+
+    removeTodo(id: string){
+        this.deleteTodo(id)
+        this.todos
     }
 }
 </script>

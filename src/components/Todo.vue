@@ -6,8 +6,9 @@
       <h2 v-else>{{todo.description}}</h2>
 
       <div class="section-icon">
-        <font-awesome-icon icon="edit" class="icon-update" @click="handleShow" />
-        <font-awesome-icon icon="trash" @click="removeTodo(todo.id)" class="icon-delete" />
+        <font-awesome-icon icon="times" class="icon-cancel" @click="handleShow" v-if="showUpdate" />
+        <font-awesome-icon icon="edit" class="icon-update" @click="handleShow" v-else />
+        <font-awesome-icon icon="trash" @click="deleteTodo(todo.id)" class="icon-delete" />
       </div>
   </div>
 </template>
@@ -21,11 +22,11 @@ export default class Todo extends Vue {
     showUpdate: boolean = false
 
     @Prop() todo: any
-    @Action('deleteTodo') deleteTodo: any
+    @Prop() removeTodo: any
     @Action('updateTodo') updateTodo: any
 
-    removeTodo(id: string){
-        this.deleteTodo(id)
+    deleteTodo(id: string){
+        this.$emit('removeTodo', id)
     }
 
     editTodo(todo: any){
@@ -34,7 +35,7 @@ export default class Todo extends Vue {
     }
 
     handleShow() {
-        this.showUpdate = true
+        this.showUpdate = this.showUpdate ? false : true
     }
 
 }
@@ -71,10 +72,14 @@ export default class Todo extends Vue {
     font-size: 1.5rem;
 }
 
-.icon-update{
+.icon-update, .icon-cancel{
     color: blue;
     cursor: pointer;
     margin: 0 15%;
     font-size: 1.5rem;
+}
+
+.icon-cancel{
+    color: black;
 }
 </style>

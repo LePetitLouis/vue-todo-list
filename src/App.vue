@@ -10,7 +10,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import AddTodo from '@/components/AddTodo.vue';
 import TodoList from '@/components/TodoList.vue';
-import { Getter } from 'vuex-class';
 
 @Component({
   components: {
