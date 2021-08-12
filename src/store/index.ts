@@ -6,18 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    todos: [
-      {
-        id: 0,
-        description: 'Test 1',
-        done: false
-      },
-      {
-        id: 1,
-        description: 'Test 2',
-        done: false
-      }
-    ]
+    todos: [{
+      id: 0,
+      description: 'Test 1',
+      done: false
+    }]
   },
 
   mutations: {
@@ -37,6 +30,11 @@ export default new Vuex.Store({
     UPDATE_TODO: (state, todo: Todo) => {
       const index = state.todos.findIndex(el => el.id === todo.id)
       state.todos[index] = todo
+    },
+
+    DELETE_ALL_TODOS: state => {
+      state.todos = []
+      console.log(state.todos)
     }
   },
 
@@ -51,6 +49,10 @@ export default new Vuex.Store({
 
     updateTodo: (store, todo: number) => {
       store.commit('UPDATE_TODO', todo)
+    },
+
+    deleteAllTodos: store => {
+      store.commit('DELETE_ALL_TODOS')
     }
   },
 
@@ -58,7 +60,13 @@ export default new Vuex.Store({
     todos: state => state.todos,
     //todosRemaining: state => state.todos.filter(todo => !todo.done),
     //todosDone: state => state.todos.filter(todo => todo.done),
-    //todosRemainingCount: (state, getters) => getters.todosRemaining(state).length(),
-    //todosDoneCount: (state, getters) => getters.todosDone(state).length()
+    todosRemainingCount: state => {
+      const todosRemaining = state.todos.filter(todo => !todo.done)
+      return todosRemaining.length
+    },
+    todosDoneCount: state => {
+      const todosDone = state.todos.filter(todo => todo.done)
+      return todosDone.length
+    }
   }
 })

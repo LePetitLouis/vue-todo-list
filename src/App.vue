@@ -3,6 +3,7 @@
     <h1>Todo List</h1>
     <AddTodo />
     <TodoList />
+    <Dashboard />
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import AddTodo from '@/components/AddTodo.vue';
 import TodoList from '@/components/TodoList.vue';
+import Dashboard from '@/components/Dashboard.vue';
 
 @Component({
   components: {
     AddTodo,
-    TodoList
+    TodoList,
+    Dashboard
   },
 })
 export default class App extends Vue {

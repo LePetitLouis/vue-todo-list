@@ -1,7 +1,8 @@
 <template>
     <div id="todo-list">
+        <a @click="removeAllTodos()" v-if="todos">Tout supprimer</a>
         <div v-for="todo in this.todos" :key="todo.id">
-              <Todo :todo="todo" @removeTodo="removeTodo" />
+              <Todo :todo="todo" />
         </div>
     </div>
 </template>
@@ -18,16 +19,16 @@ import { Getter, Action } from 'vuex-class';
 })
 export default class TodoList extends Vue {
     @Getter('todos') getTodos: any
-    @Action('deleteTodo') deleteTodo: any
+    @Action('deleteAllTodos') deleteAllTodos: any
 
     get todos() {
         return this.getTodos
     }
 
-    removeTodo(id: string){
-        this.deleteTodo(id)
-        this.todos
+    removeAllTodos() {
+        this.deleteAllTodos()
     }
+
 }
 </script>
 

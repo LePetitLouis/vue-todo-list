@@ -8,7 +8,7 @@
       <div class="section-icon">
         <font-awesome-icon icon="times" class="icon-cancel" @click="handleShow" v-if="showUpdate" />
         <font-awesome-icon icon="edit" class="icon-update" @click="handleShow" v-else />
-        <font-awesome-icon icon="trash" @click="deleteTodo(todo.id)" class="icon-delete" />
+        <font-awesome-icon icon="trash" @click="removeTodo(todo.id)" class="icon-delete" />
       </div>
   </div>
 </template>
@@ -22,11 +22,11 @@ export default class Todo extends Vue {
     showUpdate: boolean = false
 
     @Prop() todo: any
-    @Prop() removeTodo: any
+    @Action('deleteTodo') deleteTodo: any
     @Action('updateTodo') updateTodo: any
 
-    deleteTodo(id: string){
-        this.$emit('removeTodo', id)
+    removeTodo(id: string){
+        this.deleteTodo(id)
     }
 
     editTodo(todo: any){
